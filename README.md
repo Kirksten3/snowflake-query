@@ -8,6 +8,10 @@ This github action runs a list of SQL queries against a Snowflake DB, with the c
 This has been forked from the anecdotesai/snowflake-query repo because it seems that is no longer managed.
 This was designed to fix a bug that arose from oscrypto delayed updates. I plan to update and maintain this in moving forward.
 
+## v2.0
+This release updates to use the new `$GITHUB_OUTPUT` for tracking outputs between steps. Any version of python
+between 3.8 -> 3.11 is now supported as well (`>3.8,<3.12`). Tested on 3.8 and 3.11.
+
 ## Inputs
 
 - `snowflake_account` - Account name for Snowflake DB. Your account name is the full/entire string to the left of snowflakecomputing.com.
@@ -17,7 +21,6 @@ This was designed to fix a bug that arose from oscrypto delayed updates. I plan 
 - `snowflake_role` (optional) - Set a role for the user.
 - `queries` - SQL queries to execute **asynchronously and independently**.
   - May contain multiple queries, seperated by ';'
-  - Don't use ';' with the last query.
   - If you need to contain a single-quote in one or more queries, escape it with another single-quote.
 
 ## Output
@@ -33,7 +36,7 @@ It may be accessed in following steps by `${{steps.run_queries.outputs.queries_o
 ```yaml
 steps:
   - name: Run queries
-    uses: Kirksten3/snowflake-query@v1.2.1
+    uses: Kirksten3/snowflake-query@v2
     id: run_queries
     with:
         snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
@@ -59,7 +62,7 @@ strategy:
             'TABLE4', 'TABLE5']
 steps:
   - name: Run Delete Queries
-    uses: Kirksten3/snowflake-query@v1.2.1
+    uses: Kirksten3/snowflake-query@v2
     id: run_delete_queries
     with:
       snowflake_account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
