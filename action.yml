@@ -1,6 +1,6 @@
 name: 'Snowflake Query Runner Action'
 author: 'anecdotes.ai / Kirksten3'
-description: 'This action lets you run a list of SQL queries against Snowflake. Forked from anecdotes.ai to continue support.'
+description: 'This action lets you run a list of SQL queries against Snowflake. Forked from anecdotes.ai for continued support.'
 
 branding:
   icon: 'database'
@@ -31,7 +31,7 @@ inputs:
 
 outputs:
   queries_results:
-    description: 'Json encoded as base64, containing all queries results'
+    description: 'A JSON map of query_id to query_results in a list of tuples'
     
 runs:
   using: 'docker'
